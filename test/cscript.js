@@ -7,9 +7,9 @@ const TempFile = require('./../lib/temp_file');
 const cscript  = require('./../lib/cscript');
 
 describe('function cscript', ()=>{
-    
+  
   it('function cscript', (done)=>{
-      
+    
     const js = new TempFile('js');
     js.copyFromContent('WScript.Echo("{{key=值}}");');
     cscript(js.getPath(), (obj)=>{
@@ -19,4 +19,8 @@ describe('function cscript', ()=>{
     js.remove(10);
   });
   
+  it('function cscript.use', ()=>{
+      const obj = cscript.use('WScript.Echo("{{key=值}}");');
+      expect(obj['key']).equal('值');
+  });
 });
